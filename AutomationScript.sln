@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{7BDAEC9C-645A-45FB-A0A2-E1FD800B0E41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0BA1245F-7A77-4DED-9ED9-AB270F6C7FE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{48364FD8-BD4F-4608-AFD8-52B53EAD2332}"
+	ProjectSection(SolutionItems) = preProject
+		Dlls\readme.txt = Dlls\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{840A9312-65D3-474A-BB9E-AA68BD59BDE1}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\dependencies.png = Documentation\dependencies.png
+		Documentation\Model_View_Presenter_GUI_Design_Pattern.png = Documentation\Model_View_Presenter_GUI_Design_Pattern.png
+		Documentation\readme.txt = Documentation\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Analysis", "Code Analysis", "{E0571820-F030-421B-B124-09E23479949D}"
+	ProjectSection(SolutionItems) = preProject
+		Internal\Code Analysis\qaction-debug.ruleset = Internal\Code Analysis\qaction-debug.ruleset
+		Internal\Code Analysis\qaction-release.ruleset = Internal\Code Analysis\qaction-release.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelViewPresenter", "ModelViewPresenter", "{ECAF1715-0A56-4A7F-9E6B-116BD1515893}"
+	ProjectSection(SolutionItems) = preProject
+		ModelViewPresenter.xml = ModelViewPresenter.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{DFCD12AB-5C2D-4A45-A938-9E75DD6464FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelViewPresenter_1", "ModelViewPresenter_1\ModelViewPresenter_1.csproj", "{A4B24E24-8DCF-41BA-9FBC-922A7DFCBD91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelViewPresenter_1Tests", "ModelViewPresenter_1Tests\ModelViewPresenter_1Tests.csproj", "{7C6B975A-A27E-4490-8464-8F1D69DEC9E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4B24E24-8DCF-41BA-9FBC-922A7DFCBD91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B24E24-8DCF-41BA-9FBC-922A7DFCBD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B24E24-8DCF-41BA-9FBC-922A7DFCBD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B24E24-8DCF-41BA-9FBC-922A7DFCBD91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6B975A-A27E-4490-8464-8F1D69DEC9E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6B975A-A27E-4490-8464-8F1D69DEC9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6B975A-A27E-4490-8464-8F1D69DEC9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6B975A-A27E-4490-8464-8F1D69DEC9E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0571820-F030-421B-B124-09E23479949D} = {7BDAEC9C-645A-45FB-A0A2-E1FD800B0E41}
+		{ECAF1715-0A56-4A7F-9E6B-116BD1515893} = {0BA1245F-7A77-4DED-9ED9-AB270F6C7FE1}
+		{DFCD12AB-5C2D-4A45-A938-9E75DD6464FD} = {ECAF1715-0A56-4A7F-9E6B-116BD1515893}
+		{A4B24E24-8DCF-41BA-9FBC-922A7DFCBD91} = {DFCD12AB-5C2D-4A45-A938-9E75DD6464FD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {560FF9A6-7F9D-4569-9AA1-C856A59EF1F5}
+	EndGlobalSection
+EndGlobal
