@@ -57,8 +57,8 @@ using ModelViewPresenter_1.Wizard.ElementSelection;
 using ModelViewPresenter_1.Wizard.ProtocolSelection;
 
 using Skyline.DataMiner.Automation;
-using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
-using Skyline.DataMiner.Library.Automation;
+using Skyline.DataMiner.Core.DataMinerSystem.Automation;
+using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 /// <summary>
 /// DataMiner Script Class.
@@ -101,13 +101,7 @@ public class Script
 			engine.ExitSuccess("Finished");
 		};
 
-		// Loading protocols might take some time on large clusters.
-		// Show first dialog with all widgets disabled while it is loading.
-		// This gives the user a visual indication that the script has started.
-		protocolSelectionView.DisableAllWidgets();
-		protocolSelectionView.Show(false);
 		protocolSelectionPresenter.LoadFromModel();
-		protocolSelectionView.EnableAllWidgets();
 
 		controller.Run(protocolSelectionView);
 	}

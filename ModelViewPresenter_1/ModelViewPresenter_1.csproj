@@ -39,22 +39,7 @@
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SLC.CLib.IASToolkit, Version=1.7.32739.15, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SLC.CLib.IASToolkit.1.7.1.1-devF10.1.8F1.7.1.X.15\lib\net462\SLC.CLib.IASToolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="SLC.Lib.Automation, Version=1.2.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SLC.Lib.Automation.1.2.2.2\lib\net462\SLC.Lib.Automation.dll</HintPath>
-    </Reference>
-    <Reference Include="SLC.Lib.Common, Version=1.2.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SLC.Lib.Common.1.2.2.2\lib\net462\SLC.Lib.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="SLManagedAutomation">
-      <HintPath>C:\Skyline DataMiner\Files\SLManagedAutomation.dll</HintPath>
-    </Reference>
-    <Reference Include="SLNetTypes">
-      <HintPath>C:\Skyline DataMiner\Files\SLNetTypes.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
     <Content Include=".editorconfig" />
   </ItemGroup>
@@ -65,23 +50,27 @@
     <Compile Include="ModelViewPresenter_1.cs" />
     <Compile Include="Wizard\ElementSelection\ElementSelectionPresenter.cs" />
     <Compile Include="Wizard\ElementSelection\ElementSelectionView.cs" />
-    <Compile Include="Wizard\ElementSelection\IElementSelectionView.cs" />
-    <Compile Include="Wizard\ProtocolSelection\IProtocolSelectionView.cs" />
     <Compile Include="Wizard\ProtocolSelection\ProtocolSelectionPresenter.cs" />
     <Compile Include="Wizard\ProtocolSelection\ProtocolSelectionView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <PackageReference Include="Skyline.DataMiner.Core.DataMinerSystem.Automation" Version="1.1.0.2" />
+    <PackageReference Include="Skyline.DataMiner.Dev.Automation">
+      <Version>10.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit" Version="4.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties DisLinkedXmlFile="..\ModelViewPresenter.xml" DisProjectType="automationScriptProject" DisLinkId="1" />
+      <UserProperties DisLinkId="1" DisProjectType="automationScriptProject" DisLinkedXmlFile="..\ModelViewPresenter.xml" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

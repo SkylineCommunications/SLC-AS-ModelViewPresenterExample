@@ -2,7 +2,7 @@ namespace Tests
 {
 	using Moq;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 
 	public class ProtocolMocks
 	{

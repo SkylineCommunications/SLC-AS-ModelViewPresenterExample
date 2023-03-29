@@ -8,7 +8,7 @@ namespace Tests
 
 	using Moq;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 
 	[TestClass]
 	public class ModelTests

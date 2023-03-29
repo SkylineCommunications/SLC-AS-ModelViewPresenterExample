@@ -2,7 +2,7 @@ namespace ModelViewPresenter_1
 {
 	using System.Collections.Generic;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 
 	public interface IElementSelector
 	{

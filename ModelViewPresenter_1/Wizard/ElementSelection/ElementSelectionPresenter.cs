@@ -4,17 +4,17 @@ namespace ModelViewPresenter_1.Wizard.ElementSelection
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 
 	public class ElementSelectionPresenter
 	{
-		private readonly IElementSelectionView view;
+		private readonly ElementSelectionView view;
 		private readonly IElementSelector model;
 
 		private HashSet<string> selectedElements = new HashSet<string>();
 		private Dictionary<string, IDmsElement> elementsByName = new Dictionary<string, IDmsElement>();
 
-		public ElementSelectionPresenter(IElementSelectionView view, IElementSelector model)
+		public ElementSelectionPresenter(ElementSelectionView view, IElementSelector model)
 		{
 			this.view = view ?? throw new ArgumentNullException(nameof(view));
 			this.model = model ?? throw new ArgumentNullException(nameof(model));

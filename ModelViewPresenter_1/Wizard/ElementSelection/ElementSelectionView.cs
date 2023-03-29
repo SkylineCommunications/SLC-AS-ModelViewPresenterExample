@@ -1,9 +1,9 @@
 namespace ModelViewPresenter_1.Wizard.ElementSelection
 {
 	using Skyline.DataMiner.Automation;
-	using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-	public class ElementSelectionView : Dialog, IElementSelectionView
+	public class ElementSelectionView : Dialog
 	{
 		public ElementSelectionView(IEngine engine)
 			: base(engine)
@@ -16,21 +16,21 @@ namespace ModelViewPresenter_1.Wizard.ElementSelection
 
 			AddWidget(new Label("Filter"), 0, 0);
 			AddWidget(FilterTextBox, 0, 1);
-			AddWidget(new Label("Elements") { VerticalAlignment = VerticalAlignment.Top }, 1, 0);
+			AddWidget(new Label("Elements"), 1, 0, verticalAlignment: VerticalAlignment.Top);
 			AddWidget(ElementsCheckBoxList, 1, 1);
 			AddWidget(BackButton, 2, 0);
 			AddWidget(FinishButton, 2, 1);
 			AddWidget(ValidationLabel, 3, 0, 1, 2);
 		}
 
-		public ITextBox FilterTextBox { get; }
+		public TextBox FilterTextBox { get; }
 
-		public ICheckBoxList ElementsCheckBoxList { get; }
+		public CheckBoxList ElementsCheckBoxList { get; }
 
-		public ILabel ValidationLabel { get; }
+		public Label ValidationLabel { get; }
 
-		public IButton BackButton { get; }
+		public Button BackButton { get; }
 
-		public IButton FinishButton { get; }
+		public Button FinishButton { get; }
 	}
 }

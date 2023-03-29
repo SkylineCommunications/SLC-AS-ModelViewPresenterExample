@@ -1,9 +1,9 @@
 namespace ModelViewPresenter_1.Wizard.ProtocolSelection
 {
 	using Skyline.DataMiner.Automation;
-	using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-	public class ProtocolSelectionView : Dialog, IProtocolSelectionView
+	public class ProtocolSelectionView : Dialog
 	{
 		public ProtocolSelectionView(IEngine engine)
 			: base(engine)
@@ -16,8 +16,8 @@ namespace ModelViewPresenter_1.Wizard.ProtocolSelection
 			AddWidget(NextButton, 1, 1);
 		}
 
-		public IDropDown ProtocolsDropDown { get; }
+		public DropDown ProtocolsDropDown { get; }
 
-		public IButton NextButton { get; }
+		public Button NextButton { get; }
 	}
 }
