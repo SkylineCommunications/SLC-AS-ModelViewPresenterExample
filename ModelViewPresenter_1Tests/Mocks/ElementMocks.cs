@@ -2,7 +2,8 @@ namespace Tests
 {
 	using Moq;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+
 
 	public class ElementMocks
 	{
@@ -12,30 +13,35 @@ namespace Tests
 		{
 			var mocks = new MockRepository(MockBehavior.Default) { DefaultValue = DefaultValue.Mock };
 
-			MicrosoftPlatformA = mocks.OneOf<IDmsElement>(element =>
-				element.Name == "Microsoft Platform A" &&
-				element.DmsElementId == new DmsElementId(581, 5) &&
-				element.Protocol == protocolMocks.MicrosoftPlatform);
+			MicrosoftPlatformA = mocks.OneOf<IDmsElement>(
+				element =>
+					element.Name == "Microsoft Platform A" &&
+					element.DmsElementId == new DmsElementId(581, 5) &&
+					element.Protocol == protocolMocks.MicrosoftPlatform);
 
-			MicrosoftPlatformB = mocks.OneOf<IDmsElement>(element =>
-				element.Name == "Microsoft Platform B" &&
-				element.DmsElementId == new DmsElementId(582, 6) &&
-				element.Protocol == protocolMocks.MicrosoftPlatform);
+			MicrosoftPlatformB = mocks.OneOf<IDmsElement>(
+				element =>
+					element.Name == "Microsoft Platform B" &&
+					element.DmsElementId == new DmsElementId(582, 6) &&
+					element.Protocol == protocolMocks.MicrosoftPlatform);
 
-			MicrosoftPlatformC = mocks.OneOf<IDmsElement>(element =>
-				element.Name == "Microsoft Platform C" &&
-				element.DmsElementId == new DmsElementId(583, 7) &&
-				element.Protocol == protocolMocks.MicrosoftPlatform);
+			MicrosoftPlatformC = mocks.OneOf<IDmsElement>(
+				element =>
+					element.Name == "Microsoft Platform C" &&
+					element.DmsElementId == new DmsElementId(583, 7) &&
+					element.Protocol == protocolMocks.MicrosoftPlatform);
 
-			Cbr8Main = mocks.OneOf<IDmsElement>(element =>
-				element.Name == "CBR8 Main" &&
-				element.DmsElementId == new DmsElementId(581, 12) &&
-				element.Protocol == protocolMocks.CiscoCbr8);
+			Cbr8Main = mocks.OneOf<IDmsElement>(
+				element =>
+					element.Name == "CBR8 Main" &&
+					element.DmsElementId == new DmsElementId(581, 12) &&
+					element.Protocol == protocolMocks.CiscoCbr8);
 
-			Cbr8Backup = mocks.OneOf<IDmsElement>(element =>
-				element.Name == "CBR8 Backup" &&
-				element.DmsElementId == new DmsElementId(581, 13) &&
-				element.Protocol == protocolMocks.CiscoCbr8);
+			Cbr8Backup = mocks.OneOf<IDmsElement>(
+				element =>
+					element.Name == "CBR8 Backup" &&
+					element.DmsElementId == new DmsElementId(581, 13) &&
+					element.Protocol == protocolMocks.CiscoCbr8);
 
 			All = new[] { MicrosoftPlatformA, MicrosoftPlatformB, MicrosoftPlatformC, Cbr8Main, Cbr8Backup };
 

@@ -22,7 +22,7 @@ namespace Tests
 			// act
 			try
 			{
-				view.Show(false);
+				view.ShowStatic(false);
 			}
 			catch (Exception e)
 			{

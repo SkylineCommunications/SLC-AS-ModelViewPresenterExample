@@ -4,15 +4,15 @@ namespace ModelViewPresenter_1.Wizard.ElementSelection
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 	public class ElementSelectionPresenter
 	{
 		private readonly IElementSelectionView view;
 		private readonly IElementSelector model;
 
-		private HashSet<string> selectedElements = new HashSet<string>();
-		private Dictionary<string, IDmsElement> elementsByName = new Dictionary<string, IDmsElement>();
+		private HashSet<IDmsElement> selectedElements = new HashSet<IDmsElement>();
 
 		public ElementSelectionPresenter(IElementSelectionView view, IElementSelector model)
 		{
@@ -31,37 +31,52 @@ namespace ModelViewPresenter_1.Wizard.ElementSelection
 
 		public void LoadFromModel()
 		{
-			elementsByName = model.Elements.ToDictionary(element => element.Name, element => element);
-			selectedElements = new HashSet<string>(model.SelectedElements.Select(element => element.Name));
+			selectedElements = new HashSet<IDmsElement>(model.SelectedElements);
 			FilterShownOptions();
 		}
 
-		private IEnumerable<string> Filter(IEnumerable<string> source)
+		private IEnumerable<Option<IDmsElement>> FilterOptions()
 		{
-			return source
-				.Where(name => name.ToUpperInvariant().Contains(view.FilterTextBox.Text.ToUpperInvariant()));
+			return model.Elements
+				.Where(element => element.Name.ToUpperInvariant().Contains(view.FilterTextBox.Text.ToUpperInvariant()))
+				.Select(element => Option.Create(element.Name, element));
+		}
+
+		private IEnumerable<Option<IDmsElement>> FilterSelectedOptions()
+		{
+			return model.SelectedElements
+				.Where(element => element.Name.ToUpperInvariant().Contains(view.FilterTextBox.Text.ToUpperInvariant()))
+				.Select(element => Option.Create(element.Name, element));
 		}
 
 		private void UpdateSetOfSelectedElements()
 		{
-			foreach (string element in view.ElementsCheckBoxList.Checked)
+			selectedElements.Clear();
+			foreach (Option<IDmsElement> option in view.ElementsCheckBoxList.CheckedOptions)
 			{
-				selectedElements.Add(element);
+				selectedElements.Add(option.Value);
 			}
 
-			foreach (string element in view.ElementsCheckBoxList.Unchecked)
+			IEnumerable<Option<IDmsElement>> uncheckedOptions = view.ElementsCheckBoxList.Options
+				.Except(view.ElementsCheckBoxList.CheckedOptions);
+
+			foreach (Option<IDmsElement> option in uncheckedOptions)
 			{
-				selectedElements.Remove(element);
+				selectedElements.Remove(option.Value);
 			}
 		}
 
 		private void FilterShownOptions()
 		{
-			view.ElementsCheckBoxList.SetOptions(Filter(elementsByName.Keys));
-			view.ElementsCheckBoxList.UncheckAll();
-			foreach (string element in Filter(selectedElements))
+			view.ElementsCheckBoxList.Options.Clear();
+			foreach (Option<IDmsElement> option in FilterOptions())
 			{
-				view.ElementsCheckBoxList.Check(element);
+				view.ElementsCheckBoxList.Options.Add(option);
+			}
+
+			foreach (Option<IDmsElement> element in FilterSelectedOptions())
+			{
+				view.ElementsCheckBoxList.CheckedOptions.Add(element);
 			}
 		}
 
@@ -104,9 +119,9 @@ namespace ModelViewPresenter_1.Wizard.ElementSelection
 		private void StoreToModel()
 		{
 			model.SelectedElements.Clear();
-			foreach (string selectedElement in selectedElements)
+			foreach (IDmsElement selectedElement in selectedElements)
 			{
-				model.SelectedElements.Add(elementsByName[selectedElement]);
+				model.SelectedElements.Add(selectedElement);
 			}
 		}
 	}

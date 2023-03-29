@@ -1,12 +1,13 @@
 namespace ModelViewPresenter_1.Wizard.ElementSelection
 {
-	using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 	public interface IElementSelectionView : IDialog
 	{
 		ITextBox FilterTextBox { get; }
 
-		ICheckBoxList ElementsCheckBoxList { get; }
+		ICheckBoxList<IDmsElement> ElementsCheckBoxList { get; }
 
 		ILabel ValidationLabel { get; }
 

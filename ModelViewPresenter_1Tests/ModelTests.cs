@@ -8,7 +8,8 @@ namespace Tests
 
 	using Moq;
 
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+
 
 	[TestClass]
 	public class ModelTests
@@ -29,9 +30,10 @@ namespace Tests
 		public void NoNullsAfterConstructionTest()
 		{
 			// arrange
-			var dms = mocks.OneOf<IDms>(d =>
-				d.GetProtocols() == protocolMocks.All &&
-				d.GetElements() == elementMocks.All);
+			var dms = mocks.OneOf<IDms>(
+				d =>
+					d.GetProtocols() == protocolMocks.All &&
+					d.GetElements() == elementMocks.All);
 
 			// act
 			var model = new ElementSelector(dms);
@@ -47,9 +49,10 @@ namespace Tests
 		public void ChangeSelectedProtocolTest()
 		{
 			// arrange
-			var dms = mocks.OneOf<IDms>(d =>
-				d.GetProtocols() == protocolMocks.All &&
-				d.GetElements() == elementMocks.All);
+			var dms = mocks.OneOf<IDms>(
+				d =>
+					d.GetProtocols() == protocolMocks.All &&
+					d.GetElements() == elementMocks.All);
 
 			var model = new ElementSelector(dms);
 
@@ -65,9 +68,10 @@ namespace Tests
 		public void ElementSelectionClearsIfProtocolChangesTest()
 		{
 			// arrange
-			var dms = mocks.OneOf<IDms>(d =>
-				d.GetProtocols() == protocolMocks.All &&
-				d.GetElements() == elementMocks.All);
+			var dms = mocks.OneOf<IDms>(
+				d =>
+					d.GetProtocols() == protocolMocks.All &&
+					d.GetElements() == elementMocks.All);
 
 			var model = new ElementSelector(dms);
 			model.SelectedProtocol = protocolMocks.MicrosoftPlatform;
@@ -85,9 +89,10 @@ namespace Tests
 		public void KeepElementSelectionIfProtocolDoesNotChangeTest()
 		{
 			// arrange
-			var dms = mocks.OneOf<IDms>(d =>
-				d.GetProtocols() == protocolMocks.All &&
-				d.GetElements() == elementMocks.All);
+			var dms = mocks.OneOf<IDms>(
+				d =>
+					d.GetProtocols() == protocolMocks.All &&
+					d.GetElements() == elementMocks.All);
 
 			var model = new ElementSelector(dms);
 			model.SelectedProtocol = protocolMocks.MicrosoftPlatform;

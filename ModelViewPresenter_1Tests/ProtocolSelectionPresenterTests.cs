@@ -12,7 +12,7 @@ namespace Tests
 
 	using Moq;
 
-	using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 	[TestClass]
 	public class ProtocolSelectionPresenterTests
@@ -31,12 +31,14 @@ namespace Tests
 		public void LoadTest()
 		{
 			// arrange
-			var view = mocks.OneOf<IProtocolSelectionView>(v =>
-				v.ProtocolsDropDown == new DropDown());
+			var view = mocks.OneOf<IProtocolSelectionView>(
+				v =>
+					v.ProtocolsDropDown == new DropDown());
 
-			var model = mocks.OneOf<IElementSelector>(m =>
-				m.Protocols == protocolMocks.All &&
-				m.SelectedProtocol == protocolMocks.GenericPing);
+			var model = mocks.OneOf<IElementSelector>(
+				m =>
+					m.Protocols == protocolMocks.All &&
+					m.SelectedProtocol == protocolMocks.GenericPing);
 
 			var protocolSelectionPresenter = new ProtocolSelectionPresenter(view, model);
 
@@ -53,12 +55,14 @@ namespace Tests
 		public void StoreTest()
 		{
 			// arrange
-			var view = mocks.OneOf<IProtocolSelectionView>(v =>
-				v.ProtocolsDropDown == new DropDown());
+			var view = mocks.OneOf<IProtocolSelectionView>(
+				v =>
+					v.ProtocolsDropDown == new DropDown());
 
-			var model = mocks.OneOf<IElementSelector>(m =>
-				m.Protocols == protocolMocks.All &&
-				m.SelectedProtocol == protocolMocks.GenericPing);
+			var model = mocks.OneOf<IElementSelector>(
+				m =>
+					m.Protocols == protocolMocks.All &&
+					m.SelectedProtocol == protocolMocks.GenericPing);
 
 			var presenter = new ProtocolSelectionPresenter(view, model);
 			presenter.LoadFromModel();

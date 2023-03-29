@@ -13,8 +13,8 @@ namespace Tests
 
 	using Moq;
 
-	using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
-	using Skyline.DataMiner.Library.Common;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 	[TestClass]
 	public class ElementSelectionPresenterTests
@@ -35,18 +35,21 @@ namespace Tests
 		public void LoadTest()
 		{
 			// arrange
-			var view = mocks.OneOf<IElementSelectionView>(v =>
-				v.ElementsCheckBoxList == new CheckBoxList() &&
-				v.FilterTextBox == new TextBox());
+			var view = mocks.OneOf<IElementSelectionView>(
+				v =>
+					v.ElementsCheckBoxList == new CheckBoxList<IDmsElement>() &&
+					v.FilterTextBox == new TextBox());
 
 			IDmsElement[] microsoftPlatformElements =
 			{
-				elementMocks.MicrosoftPlatformA, elementMocks.MicrosoftPlatformB,
-				elementMocks.MicrosoftPlatformC
+				elementMocks.MicrosoftPlatformA,
+				elementMocks.MicrosoftPlatformB,
+				elementMocks.MicrosoftPlatformC,
 			};
-			var model = mocks.OneOf<IElementSelector>(m =>
-				m.Elements == microsoftPlatformElements &&
-				m.SelectedElements == new List<IDmsElement> { elementMocks.MicrosoftPlatformB }
+			var model = mocks.OneOf<IElementSelector>(
+				m =>
+					m.Elements == microsoftPlatformElements &&
+					m.SelectedElements == new List<IDmsElement> { elementMocks.MicrosoftPlatformB }
 			);
 
 			var presenter = new ElementSelectionPresenter(view, model);
@@ -56,27 +59,29 @@ namespace Tests
 
 			// assert
 			string[] expectedOptions = microsoftPlatformElements.Select(element => element.Name).ToArray();
-			view.ElementsCheckBoxList.Options.Should().BeEquivalentTo(expectedOptions);
-			view.ElementsCheckBoxList.Checked.Should().BeEquivalentTo(elementMocks.MicrosoftPlatformB.Name);
+			view.ElementsCheckBoxList.Options.Select(option => option.Name).Should().BeEquivalentTo(expectedOptions);
+			view.ElementsCheckBoxList.CheckedOptions.Select(option => option.Name).Should().BeEquivalentTo(elementMocks.MicrosoftPlatformB.Name);
 		}
 
 		[TestMethod]
 		public void StoreTest()
 		{
 			// arrange
-			var view = mocks.OneOf<IElementSelectionView>(v =>
-				v.ElementsCheckBoxList == new CheckBoxList() &&
-				v.FilterTextBox == new TextBox());
+			var view = mocks.OneOf<IElementSelectionView>(
+				v =>
+					v.ElementsCheckBoxList == new CheckBoxList<IDmsElement>() &&
+					v.FilterTextBox == new TextBox());
 
-			var model = mocks.OneOf<IElementSelector>(m =>
-				m.Elements == elementMocks.MicrosoftPlatformElements &&
-				m.SelectedElements == new List<IDmsElement> { elementMocks.MicrosoftPlatformB });
+			var model = mocks.OneOf<IElementSelector>(
+				m =>
+					m.Elements == elementMocks.MicrosoftPlatformElements &&
+					m.SelectedElements == new List<IDmsElement> { elementMocks.MicrosoftPlatformB });
 
 			var presenter = new ElementSelectionPresenter(view, model);
 			presenter.LoadFromModel();
 
 			// act
-			view.ElementsCheckBoxList.Check(elementMocks.MicrosoftPlatformC.Name);
+			view.ElementsCheckBoxList.CheckedOptions.Add(Option.Create(elementMocks.MicrosoftPlatformC.Name, elementMocks.MicrosoftPlatformC));
 			Mock.Get(view).Raise(v => v.Interacted += null, EventArgs.Empty); // mock dialog interacted event
 			Mock.Get(view.FinishButton).Raise(button => button.Pressed += null, EventArgs.Empty); // mock button press
 
@@ -89,19 +94,21 @@ namespace Tests
 		public void StoreInvalidTest()
 		{
 			// arrange
-			var view = mocks.OneOf<IElementSelectionView>(v =>
-				v.ElementsCheckBoxList == new CheckBoxList() &&
-				v.FilterTextBox == new TextBox());
+			var view = mocks.OneOf<IElementSelectionView>(
+				v =>
+					v.ElementsCheckBoxList == new CheckBoxList<IDmsElement>() &&
+					v.FilterTextBox == new TextBox());
 
-			var model = mocks.OneOf<IElementSelector>(m =>
-				m.Elements == elementMocks.MicrosoftPlatformElements &&
-				m.SelectedElements == new List<IDmsElement> { elementMocks.MicrosoftPlatformB });
+			var model = mocks.OneOf<IElementSelector>(
+				m =>
+					m.Elements == elementMocks.MicrosoftPlatformElements &&
+					m.SelectedElements == new List<IDmsElement> { elementMocks.MicrosoftPlatformB });
 
 			var presenter = new ElementSelectionPresenter(view, model);
 			presenter.LoadFromModel();
 
 			// act
-			view.ElementsCheckBoxList.Uncheck(elementMocks.MicrosoftPlatformB.Name);
+			view.ElementsCheckBoxList.CheckedOptions.Remove(Option.Create(elementMocks.MicrosoftPlatformB.Name, elementMocks.MicrosoftPlatformB));
 			Mock.Get(view).Raise(selectionView => selectionView.Interacted += null, EventArgs.Empty);
 			Mock.Get(view.FinishButton).Raise(button => button.Pressed += null, EventArgs.Empty); // mock button press
 
@@ -114,20 +121,23 @@ namespace Tests
 		public void FilterHasNoInfluenceOnSelectedItemsTest()
 		{
 			// arrange
-			var view = mocks.OneOf<IElementSelectionView>(v =>
-				v.ElementsCheckBoxList == new CheckBoxList() &&
-				v.FilterTextBox == mocks.OneOf<ITextBox>(textBox =>
-					textBox.Text == String.Empty));
+			var view = mocks.OneOf<IElementSelectionView>(
+				v =>
+					v.ElementsCheckBoxList == new CheckBoxList<IDmsElement>() &&
+					v.FilterTextBox == mocks.OneOf<ITextBox>(
+						textBox =>
+							textBox.Text == String.Empty));
 
-			var model = mocks.OneOf<IElementSelector>(m =>
-				m.Elements == elementMocks.MicrosoftPlatformElements &&
-				m.SelectedElements == new List<IDmsElement>());
+			var model = mocks.OneOf<IElementSelector>(
+				m =>
+					m.Elements == elementMocks.MicrosoftPlatformElements &&
+					m.SelectedElements == new List<IDmsElement>());
 
 			var presenter = new ElementSelectionPresenter(view, model);
 			presenter.LoadFromModel();
 
 			// act
-			view.ElementsCheckBoxList.Check(elementMocks.MicrosoftPlatformC.Name);
+			view.ElementsCheckBoxList.CheckedOptions.Add(Option.Create(elementMocks.MicrosoftPlatformC.Name, elementMocks.MicrosoftPlatformC));
 
 			view.FilterTextBox.Text = "Element that does not exist"; // filter that will match with zero elements
 			Mock.Get(view).Raise(v => v.Interacted += null, EventArgs.Empty);

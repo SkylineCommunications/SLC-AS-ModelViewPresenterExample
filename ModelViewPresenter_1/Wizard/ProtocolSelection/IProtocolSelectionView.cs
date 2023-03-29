@@ -1,6 +1,6 @@
 namespace ModelViewPresenter_1.Wizard.ProtocolSelection
 {
-	using Skyline.DataMiner.DeveloperCommunityLibrary.InteractiveAutomationToolkit;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 	public interface IProtocolSelectionView : IDialog
 	{
